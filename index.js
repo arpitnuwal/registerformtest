@@ -20,8 +20,8 @@ mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => alert('MongoDB connected successfully'))
-.catch(err => alert('MongoDB connection error:', err));
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // Define a schema for the register form
 const registerSchema = new mongoose.Schema({
@@ -34,7 +34,7 @@ const Register = mongoose.model("Register", registerSchema);
 
 // Routes
 app.get("/", (req, res) => {
-  alert(dbURI);
+  console.log(dbURI);
   res.sendFile(__dirname + "/pages/index.html");
 });
 
