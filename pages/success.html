@@ -13,7 +13,12 @@
 <div class="container">
   <h2>successs</h2>
   
-  
+  <ul>
+    <% registers.forEach(register => { %>
+        <li>Name: <%= register.name %>, Email: <%= register.email %></li>
+        <!-- Add more fields as needed -->
+    <% }); %>
+</ul>
 </div>
 
 </body>
