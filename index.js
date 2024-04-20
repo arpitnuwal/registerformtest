@@ -1,16 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+const ejs = require('ejs');
 const app = express();
-
+const path = require('path');
 // Loading environment variables
 require('dotenv').config();
 
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 // Define port from environment variables with a fallback
 const port = process.env.PORT || 3000;
 
@@ -57,8 +58,7 @@ app.post("/register", async (req, res) => {
 
 app.get("/success",async (req, res) => {
   const registers = await Register.find();
-  res.json(registers);
-  console.log(registers);
+ res.render('success', { registers: registers });
   res.sendFile(__dirname + "/pages/success.html");
 });
 
