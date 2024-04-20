@@ -19,6 +19,7 @@ const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
+
 })
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
@@ -54,11 +55,18 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/success", (req, res) => {
+app.get("/success",async (req, res) => {
+  const registers = await Register.find();
+  res.json(registers);
+  console.log(registers);
   res.sendFile(__dirname + "/pages/success.html");
 });
 
-app.get("/error", (req, res) => {
+app.get("/error",async (req, res) => {
+
+  const registers = await Register.find();
+  res.json(registers);
+  console.log(registers);
   res.sendFile(__dirname + "/pages/error.html");
 });
 
