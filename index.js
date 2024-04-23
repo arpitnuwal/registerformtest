@@ -58,17 +58,27 @@ app.post("/register", async (req, res) => {
 
 app.get("/success",async (req, res) => {
   const registers = await Register.find();
- res.render('success', { registers: registers });
-  res.sendFile(__dirname + "/pages/success.html");
+ res.render('success', { list: registers });
+ 
 });
 
 app.get("/error",async (req, res) => {
 
-  const registers = await Register.find();
-  res.json(registers);
-  console.log(registers);
+ 
   res.sendFile(__dirname + "/pages/error.html");
 });
+
+
+
+app.post("/categorylist", async (req, res) => {
+  try {
+    const data = await Register.find({});
+    res.json(data);
+  } catch (err) {
+    res.json(false);
+  }
+});
+
 
 // Server listening
 app.listen(port, () => {
