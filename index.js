@@ -6,11 +6,12 @@ const app = express();
 const path = require('path');
 // Loading environment variables
 require('dotenv').config();
-
+var cors = require("cors");
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
+app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 // Define port from environment variables with a fallback
 const port = process.env.PORT || 3000;
